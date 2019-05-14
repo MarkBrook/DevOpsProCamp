@@ -32,9 +32,9 @@ def run_script():
         elif command == 'mem':
             get_memory()
         else:
-            sys.exit(f'Argument {command} is not supported. Try "cpu" or "mem" instead.')
+            sys.exit(f'Argument "{command}" is not supported. Try "cpu" or "mem" instead.')
     elif len(command) == 0:
-        sys.exit('Need to provide 1 argument: "cpu" or "mem"')
+        sys.exit('Too few arguments. Try "cpu" or "mem".')
     else:
         sys.exit('Too many arguments provided. Try "cpu" or "mem" instead.')
 
