@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM python:3.6
 WORKDIR /usr/app
-
-RUN apt-get update && apt-get install
+ADD ./metrics.py ./
+RUN pip3 install --upgrade pip && pip3 install psutil

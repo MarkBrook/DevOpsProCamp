@@ -1,5 +1,6 @@
-import psutil as ps
 import sys
+
+import psutil as ps
 
 cpu = ('idle', 'user', 'guest', 'iowait', 'steal', 'system')
 virtual_memory = ('total', 'used', 'free', 'shared')
@@ -20,20 +21,23 @@ def get_memory():
         print(f'swap {item}: {getattr(ps.swap_memory(), item)}')
 
 
-def cli():
+def run_script():
     command = sys.argv[1::]
 
-    if command == 'cpu':
-        get_cpu()
-    elif command == 'mem':
-        get_memory()
+    if len(command) == 1:
+        command = command[0]
+
+        if command == 'cpu':
+            get_cpu()
+        elif command == 'mem':
+            get_memory()
+        else:
+            sys.exit(f'Argument {command} is not supported. Try "cpu" or "mem" instead.')
     elif len(command) == 0:
-        sys.exit('Need 1 argument: "cpu" or "mem"')
-    elif len(command) > 1:
-        sys.exit('Too many arguments provided. Need only 1: "cpu" or "mem"')
+        sys.exit('Need to provide 1 argument: "cpu" or "mem"')
     else:
-        sys.exit('Wrong argument provided: only "cpu" or "mem" supported')
+        sys.exit('Too many arguments provided. Try "cpu" or "mem" instead.')
 
 
 if __name__ == '__main__':
-    cli()
+    run_script()
